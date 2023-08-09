@@ -2,7 +2,7 @@
 
 Notflix is a streaming service web application where users can explore and enjoy a wide range of movies and shows. Users can sign up, log in, save their favorite shows, and manage their saved content.
 
-![Notflix]
+
 
 ## Features
 
@@ -20,7 +20,7 @@ Notflix is a streaming service web application where users can explore and enjoy
 
 ## Setup and Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/notflix.git`
+1. Clone the repository: `git clone https://github.com/abinzach/notflix.git`
 2. Navigate to the project directory: `cd notflix`
 3. Install dependencies: `yarn install`
 4. Set up Firebase:
