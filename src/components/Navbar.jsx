@@ -5,7 +5,7 @@ import { UserAuth } from '../context/AuthContext';
 const Navbar = () => {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
-  // console.log(user.email)
+ 
 
   const handleLogout = async () => {
     try {
@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className='flex items-center justify-between p-4 z-[100] w-full absolute'>
+    <div className='flex items-center justify-between bg-gradient-to-b from-black p-4 z-[100] w-full absolute'>
       <Link to='/'>
         <h1 className='text-blue-700 text-4xl font-bold cursor-pointer hover:text-pink-300 transition-all duration-500'>
           NOTFLIX
