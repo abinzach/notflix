@@ -1,11 +1,22 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import requests from '../Requests';
+import MoviePage from './MoviePage';
 
 const Main = () => {
   const [movies, setMovies] = useState([]);
 
   const movie = movies[Math.floor(Math.random() * movies.length)];
+  const [selectedMovie, setSelectedMovie] = useState(null);
+    const openMoviePage = (movie) => {
+      console.log(movie)
+      console.log("clicked movie")
+    setSelectedMovie(movie);
+  };
+
+  const closeMoviePage = () => {
+    setSelectedMovie(null);
+  };
 
   /*useEffect(() => {
     axios.get(requests.requestPopular).then((response) => {
@@ -47,7 +58,7 @@ const Main = () => {
         <div className='z-10 absolute w-full top-[40%] p-4 md:p-8'>
           <h1 className='text-4xl md:text-5xl font-bold'>{movie?.title}</h1>
           <div className='my-4'>
-            <button className='border bg-gray-300 text-black rounded-lg hover:bg-blue-700 hover:text-white hover:border-blue-700 py-2 px-5 transition-all duration-500'>
+            <button onClick={() => openMoviePage(movie)} className='border bg-gray-300 text-black rounded-lg hover:bg-blue-700 hover:text-white hover:border-blue-700 py-2 px-5 transition-all duration-500'>
               Play
             </button>
             <button className='border rounded-lg text-white border-gray-300 py-2 px-5 ml-4  hover:text-blue-700 hover:border-blue-700 transition-all duration-400' >
@@ -64,6 +75,10 @@ const Main = () => {
         </div>
         
       </div>
+      {selectedMovie && (
+        <MoviePage movie={selectedMovie} onClose={closeMoviePage} />
+      )}
+    
       
     </div>
     

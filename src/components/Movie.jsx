@@ -4,12 +4,19 @@ import { UserAuth } from '../context/AuthContext';
 import { db } from '../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 
-const Movie = ({ item }) => {
+const Movie = ({ item, onClick }) => {
   const [like, setLike] = useState(false);
   const [saved, setSaved] = useState(false);
   const { user } = UserAuth();
+  
 
   const movieID = doc(db, 'users', `${user?.email}`);
+
+  const handleClick = () => {
+    // Call the onClick function when the movie is clicked
+    console.log(item)
+    onClick(item);
+  };
 
   const saveShow = async () => {
     if (user?.email) {
@@ -28,7 +35,7 @@ const Movie = ({ item }) => {
   };
 
   return (
-    <div className='w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block rounded cursor-pointer relative p-2 hover:lg:w-[340px] hover:md:w-[300px] hover:sm:w-[240px] hover:w-[190px] transition-all duration-700  '>
+    <div onClick={handleClick} className='w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block rounded cursor-pointer relative p-2 hover:lg:w-[340px] hover:md:w-[300px] hover:sm:w-[240px] hover:w-[190px] transition-all duration-700  '>
       <img
         className='w-full h-auto block rounded-lg'
         src={`https://image.tmdb.org/t/p/w500/${item?.backdrop_path}`}

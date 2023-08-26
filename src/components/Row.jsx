@@ -2,9 +2,12 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Movie from './Movie';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import MoviePage from './MoviePage';
+
 
 const Row = ({ title, fetchURL, rowID }) => {
   const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
     axios.get(fetchURL).then((response) => {
@@ -19,6 +22,15 @@ const Row = ({ title, fetchURL, rowID }) => {
   const slideRight = () => {
     var slider = document.getElementById('slider' + rowID);
     slider.scrollLeft = slider.scrollLeft + 500;
+  };
+    const openMoviePage = (movie) => {
+      console.log(movie)
+      console.log("clicked movie")
+    setSelectedMovie(movie);
+  };
+
+  const closeMoviePage = () => {
+    setSelectedMovie(null);
   };
 
   return (
@@ -35,7 +47,8 @@ const Row = ({ title, fetchURL, rowID }) => {
           className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'
         >
           {movies.map((item, id) => (
-            <Movie key={id} item={item} />
+                     <Movie onClick={() => openMoviePage(item)} key={id} item={item} />
+
           ))}
         </div>
         <MdChevronRight
@@ -44,6 +57,11 @@ const Row = ({ title, fetchURL, rowID }) => {
           size={40}
         />
       </div>
+     
+      {selectedMovie && (
+        <MoviePage movie={selectedMovie} onClose={closeMoviePage} />
+      )}
+    
     </>
   );
 };
